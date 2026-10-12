@@ -16,7 +16,7 @@ Self-hosting an agent means a VPS or a spare Mac, Docker, ports and firewall rul
 |---|---|
 | [OpenClaw](https://github.com/openclaw/openclaw) | The original open-source agent framework (MIT) and the largest community. The safe default. |
 | [Hermes Agent](https://github.com/NousResearch/hermes-agent) | By Nous Research, built around memory that lasts across sessions. Several bots can share one instance. |
-| Coding harness | Not a chat bot: a cloud dev box with Claude Code, Codex, OpenCode, Aider, pi and more installed, driven from a browser terminal. Code and logins survive a reset. |
+| Coding harness | Not a chat bot: a cloud dev box with Claude Code, Codex, OpenCode, Aider, pi and more installed, driven from a browser terminal or from its own Telegram bot. Code and logins survive a reset. |
 
 All three run on the same plans and infrastructure. You choose at deploy time.
 
@@ -34,6 +34,8 @@ All three run on the same plans and infrastructure. You choose at deploy time.
 | OpenClaw app for iPhone and Android | ✓ | — |
 | Hermes Desktop | — | ✓ |
 
+You can ask the bot itself to connect a chat app or show its pairing QR code. You also choose who may talk to it: on WhatsApp only you, an allowlist or anyone, and in Telegram groups it can stay quiet until someone @mentions it.
+
 ## Features
 
 ### Its own computer
@@ -43,16 +45,17 @@ All three run on the same plans and infrastructure. You choose at deploy time.
 - Live Browser: watch the agent browse in real time and take over for a login or a 2FA tap, then hand control back.
 - Live Desktop: a full Linux desktop with browser, terminal and files in a browser tab.
 - Connect your own computer so the agent can work on it, with your approval.
-- Host static and dynamic websites with automatic HTTPS and custom domains.
+- Host static and dynamic websites with automatic HTTPS and custom domains, and show yours off in the public websites gallery if you like.
 - Build Android APKs, iOS previews and Expo apps.
 - Edit the bot's config and instructions in the browser, with one-click rollback and one-click version updates.
+- Large files come back as secure, time-limited download links.
 
 ### Apps, tools and skills
 
 - 1,000+ app integrations (Gmail, GitHub, Google Drive, Calendar and Sheets, Slack, Notion, Outlook, Canva and more), connected by OAuth or just by asking the bot.
 - Thousands of community skills, security-vetted, installable on one bot or synced to all of them.
 - A catalog of 100+ open-source tools and connectors installable in a click: n8n, Ollama, ComfyUI, Playwright, Crawl4AI, SearXNG, yt-dlp, Mem0 and more.
-- Long-term memory tools, voice transcription and real-time web search.
+- Long-term memory tools, voice transcription and real-time web search, with your own search key (Tavily, and more on Hermes) if you prefer.
 - A catalog of Chinese apps (高德, 12306, 飞书, 企查查 and more) for Chinese-language users.
 - Trigger a bot from a webhook, and point desktop AI apps at your bot through an opt-in endpoint.
 
@@ -65,9 +68,11 @@ All three run on the same plans and infrastructure. You choose at deploy time.
 
 ### Dashboard
 
+- Quick Chat: every bot in one chat window, one click to switch. Name each bot, and get starter prompts right after deploy.
 - Web chat with slash commands, file, image, PDF and spreadsheet uploads, live tool progress, and inline images and video.
 - Interactive views in Hermes chat: charts, drawings and small games, not just text.
 - Scheduled tasks in your own timezone.
+- Ask OpenClaw, the built-in setup and repair assistant, from the bot card or with `/openclaw` in Telegram. Hermes bots open their native Hermes dashboard from the card with no second password.
 - Real-time logs and health monitoring; sleeping bots wake up automatically.
 - Automatic daily backups, plus one-click export and import of the whole bot.
 - Templates to start from, and a searchable guides library.
@@ -80,10 +85,10 @@ All three run on the same plans and infrastructure. You choose at deploy time.
 
 ## Models
 
-GPT, Claude, Gemini, Grok, DeepSeek, Kimi, GLM, MiniMax, Qwen and more, switchable at any time without redeploying, including mid-chat with `/model`. Three ways to pay for them:
+GPT, Claude, Gemini, Grok, DeepSeek, Kimi, GLM, MiniMax, Qwen and more, switchable at any time without redeploying, including mid-chat with `/model`. The picker also browses the full OpenRouter catalog. Three ways to pay for them:
 
 - Included AI credits on every paid plan, top-ups when you need more, and free models.
-- Bring your own key: OpenAI, Anthropic, Google, xAI, OpenRouter, DeepSeek, Moonshot, Groq and others, or any OpenAI-compatible endpoint.
+- Bring your own key: OpenAI, Anthropic, Google, xAI, OpenRouter, DeepSeek, Moonshot, Groq, Ollama Cloud (Hermes) and others, or any OpenAI-compatible endpoint.
 - Use an existing ChatGPT subscription instead of per-token API billing.
 
 The current list and per-token prices are on [openclawlaunch.com/models](https://openclawlaunch.com/models).
@@ -92,20 +97,24 @@ The current list and per-token prices are on [openclawlaunch.com/models](https:/
 
 | Plan | Price | Machine | AI credits |
 |---|---|---|---|
-| Free trial | $0 for 30 minutes, no card | Web chat, free models | Free tokens |
+| Free trial | $0 for 30 minutes, no card | Web chat and chat apps, free models | Free tokens |
 | Lite | $3 first month, then $6/mo ($60/yr) | 1 vCPU, 2 GB RAM, 10 GB, 1 instance | $1/mo |
 | Pro | $20/mo ($200/yr) | 2 vCPU, 4 GB RAM, 40 GB, up to 3 instances | $10/mo |
 
-OpenClaw and Hermes cost the same. Need more? Add extra bots, storage, CPU and RAM from the dashboard. Monthly plans cancel anytime; annual plans have a 30-day refund. Full details: [pricing](https://openclawlaunch.com/pricing).
+OpenClaw and Hermes cost the same. Need more? Add extra bots, storage, CPU and RAM from the dashboard. Monthly plans cancel anytime; annual plans have a 30-day refund. Refer a friend and earn $1 in AI credits when they subscribe. Full details: [pricing](https://openclawlaunch.com/pricing).
+
+## Developer API and CLI
+
+Every account gets a REST API (`/api/v1`), the `openclawlaunch` CLI and scoped API keys. Manage bots, channels, files, export and import, SSH and signed webhooks from code; create coding workspaces (optionally on an isolated gVisor kernel) and run an agent from a single prompt with its output streamed back.
 
 ## Build & Resell
 
 Sell agents under your own brand. [Build & Resell](https://openclawlaunch.com/resell) is prepaid by the hour and includes:
 
-- a ready-made storefront at `yourname.openclawlaunch.app`;
-- a REST API (`/api/v1`) for instances, channels, files, export and import, SSH, coding workspaces and signed webhooks;
-- an `openclawlaunch` CLI and scoped API keys;
-- customers who can bring their own model keys and connect their own chat apps.
+- a ready-made storefront at `yourname.openclawlaunch.app`, with customer sign-in and password reset;
+- the same API, CLI and keys, scoped to your customers' bots;
+- customers who can bring their own model keys and connect their own chat apps;
+- moving a customer between Lite and Pro without rebuilding their bot, and a starter credit with your first key.
 
 ## Security
 
